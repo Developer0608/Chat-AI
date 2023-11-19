@@ -4,7 +4,7 @@ const serverless = require('serverless-http')
 const bodyParser = require('body-parser');
 require('dotenv').config();
 require("./database/mongoDB");
-// const PORT = process.env.PORT;
+const PORT = process.env.PORT;
 
 const trainingV1ModuleRequest = require("./routes/trainModuleRequest");
 const trainingV1ModuleResponse = require("./routes/trainingModuleResponse");
@@ -26,8 +26,8 @@ app.get('/health', (req, res) => {
     })
 })
 
-// app.listen(PORT, () => {
-//         console.log(`Server is Listening on PORT :::: ${PORT}`);
-// })
+app.listen(PORT, () => {
+        console.log(`Server is Listening on PORT :::: ${PORT}`);
+})
 
 module.exports.handler = serverless(app);

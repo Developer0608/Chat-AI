@@ -35,6 +35,7 @@ const trainingV1ModuleResponse = async(req, res) => {
     try{
         let { request } = req.body;
         if(isForCalculation(request)){
+            request = request.replace(/=\s*\??$/, '');
             const calculationResult = eval(request);
             return res.status(201).json({
                 success : true,
@@ -45,6 +46,7 @@ const trainingV1ModuleResponse = async(req, res) => {
             })
         }
         
+        return;
         const getResponseForThisRequest = await V1ModuleModel.findOne({request : {$elemMatch : { $regex : request.trim(), $options : "i"}}});
         if(getResponseForThisRequest == null){
             const result = await autoLearningProcess(request);
