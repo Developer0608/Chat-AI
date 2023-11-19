@@ -1,9 +1,10 @@
 const express = require('express');
 const app = express();
+const serverless = require('serverless-http')
 const bodyParser = require('body-parser');
 require('dotenv').config();
 require("./database/mongoDB");
-const PORT = process.env.PORT;
+// const PORT = process.env.PORT;
 
 const trainingV1ModuleRequest = require("./routes/trainModuleRequest");
 const trainingV1ModuleResponse = require("./routes/trainingModuleResponse");
@@ -18,12 +19,15 @@ app.use((req, res, next) => {
 app.use(bodyParser.json())
 app.use(trainingV1ModuleRequest);
 app.use(trainingV1ModuleResponse);
-app.get('/', (req, res) => {
+app.get('/health', (req, res) => {
     return res.status(201).json({
         success : true,
         message : 'Server is up and running'
     })
 })
-app.listen(PORT, () => {
-        console.log(`Server is Listening on PORT :::: ${PORT}`);
-})
+
+// app.listen(PORT, () => {
+//         console.log(`Server is Listening on PORT :::: ${PORT}`);
+// })
+
+module.exports.handler = serverless(app);

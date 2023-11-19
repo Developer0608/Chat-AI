@@ -1,7 +1,6 @@
 const V1ModuleModel = require("../models/V1ModuleModel");
 const autoLearningProcess = require("../utility/autoLeaningProcess");
 const isForCalculation = require("../utility/isForCalculation");
-const natural = require('natural');
  
 
 const trainingV1Module = async (req, res) => {

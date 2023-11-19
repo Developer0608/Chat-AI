@@ -1,0 +1,13 @@
+service: modern-ai
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+
+functions:
+  myFunction:
+    handler: index.handler
+    events:
+      - http: ANY /
+      - http: 'ANY {proxy+}'
+      
