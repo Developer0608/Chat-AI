@@ -1,18 +1,20 @@
-// const nlp = require('nlp');
+const Typo = require('typo-js');
+const dictionary = new Typo('en_US');
 
-// const spellChecker = async(string) => {
-//     try{
-//         const docOfString = nlp(string);
-//         docOfString.terms().forEach(term => {
-//             if (term.found) 
-//               term.replaceWith(term.corrections[0]);
-//         });
-
-//         const correctedString = doc.text();
-//         return correctedString;
-//     }catch(err){
-//         return err;
-//     }
-// }
-
-// module.exports = spellChecker;
+const autocorrectString = (inputString) => { 
+  const words = inputString.split(/\s+/);
+ 
+  const correctedWords = words.map(word => {
+    const isMisspelled = !dictionary.check(word);
+    if (isMisspelled) { 
+      const suggestions = dictionary.suggest(word);
+      return suggestions.length > 0 ? suggestions[0] : word;
+    } else 
+      return word;
+  });
+ 
+  const correctedString = correctedWords.join(' ');
+  return correctedString;
+}
+ 
+module.exports = {autocorrectString}
