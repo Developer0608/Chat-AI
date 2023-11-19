@@ -2,8 +2,7 @@ const V1ModuleModel = require("../models/V1ModuleModel");
 const autoLearningProcess = require("../utility/autoLeaningProcess");
 const isForCalculation = require("../utility/isForCalculation");
 const natural = require('natural');
-
-// const spellChecker = require("../utility/spellChecker");
+ 
 
 const trainingV1Module = async (req, res) => {
     try{
@@ -46,8 +45,6 @@ const trainingV1ModuleResponse = async(req, res) => {
                 }
             })
         }
-
-         
         
         const getResponseForThisRequest = await V1ModuleModel.findOne({request : {$elemMatch : { $regex : request.trim(), $options : "i"}}});
         if(getResponseForThisRequest == null){
