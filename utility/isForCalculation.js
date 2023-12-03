@@ -4,7 +4,7 @@ const isForCalculation = (string) => {
         const pattern = /^[\d\s+\-*/.()%]+=?$/;
         return pattern.test(string);
     }catch(err){
-
+        return err;
     }
 }
 

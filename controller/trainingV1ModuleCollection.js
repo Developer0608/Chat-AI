@@ -40,13 +40,12 @@ const trainingV1ModuleResponse = async(req, res) => {
             return res.status(201).json({
                 success : true,
                 message : {
-                    request,
+                    request, 
                     response :  calculationResult
                 }
             })
         }
         
-        return;
         const getResponseForThisRequest = await V1ModuleModel.findOne({request : {$elemMatch : { $regex : request.trim(), $options : "i"}}});
         if(getResponseForThisRequest == null){
             const result = await autoLearningProcess(request);
@@ -119,3 +118,7 @@ module.exports = {
     trainingV1ModuleResponse,
     getAllDataOfAI
 }
+
+
+ 
+
