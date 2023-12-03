@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-// const serverless = require('serverless-http')
+const serverless = require('serverless-http')
 const bodyParser = require('body-parser');
 require('dotenv').config();
 require("./database/mongoDB");
@@ -31,4 +31,4 @@ app.listen(PORT, () => {
         console.log(`Server is Listening on PORT :::: ${PORT}`);
 })
 
-// module.exports.handler = serverless(app);
+module.exports.handler = serverless(app);
