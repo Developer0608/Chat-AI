@@ -34,7 +34,8 @@ const loginHandler = async (req, res) => {
     try{
         const {email, password} = req.body;
         const userDetails = await User.findOne({email}).lean();
-    
+        
+        console.log(userDetails);
         if(!userDetails) 
             return res.status(403).json({
                 success : false,
